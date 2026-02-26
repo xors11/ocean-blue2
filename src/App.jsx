@@ -67,6 +67,11 @@ export default function App() {
     const [locationId, setLocationId] = useState(LOCATIONS[0].id);
     const [activeParams, setActiveParams] = useState(['sea_surface_temp', 'wind_speed', 'air_pressure']);
 
+    // ── Sidebar State (Mobile) ────────────────────────────────────────────────
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const toggleSidebar = useCallback(() => setIsSidebarOpen(v => !v), []);
+    const closeSidebar = useCallback(() => setIsSidebarOpen(false), []);
+
     // ── View mode + year filter ── ─────────────────────────────────────────────
     const [viewMode, setViewMode] = useState('live');        // 'live' | 'historical'
     const [selectedYear, setSelectedYear] = useState(2023); // Default latest year
@@ -145,12 +150,19 @@ export default function App() {
     );
 
     return (
-        <div style={{ display: 'flex', height: '100vh', overflow: 'hidden' }}>
+        <div style={{ 
+            display: 'flex', 
+            flexDirection: window.innerWidth <= 768 ? 'column' : 'row',
+            height: '100vh', 
+            overflow: 'hidden',
+            position: 'relative'
+        }}>
             {/* ── Sidebar ──────────────────────────────────────────────────────── */}
             <Sidebar
                 locationId={locationId} onLocationChange={handleLocationChange}
                 activeParams={activeParams} onToggleParam={toggleParam}
                 onRefresh={refetch}
+                isOpen={isSidebarOpen} onClose={closeSidebar}
             />
 
             {/* ── Main Panel ───────────────────────────────────────────────────── */}
@@ -164,15 +176,21 @@ export default function App() {
             >
                 {/* Header */}
                 <div className="flex items-start justify-between mb-6 flex-wrap gap-3">
-                    <div>
-                        <h1
-                            className="gradient-text"
-                            style={{ fontSize: '1.6rem', fontWeight: 900, letterSpacing: '-0.02em', lineHeight: 1.2 }}
-                        >
-                            Ocean Data Explorer
-                        </h1>
-                        <div style={{ color: '#4db8e8', fontSize: '0.8rem', marginTop: '0.25rem' }}>
-                            {location.label} &nbsp;·&nbsp; {isHistorical ? `Historical Data — ${selectedYear}` : 'Live Hourly Data'}
+                    <div className="flex items-start gap-3">
+                        {/* Mobile Menu Toggle */}
+                        <button className="mobile-menu-btn" onClick={toggleSidebar}>
+                            ☰
+                        </button>
+                        <div>
+                            <h1
+                                className="gradient-text"
+                                style={{ fontSize: '1.6rem', fontWeight: 900, letterSpacing: '-0.02em', lineHeight: 1.2 }}
+                            >
+                                Ocean Data Explorer
+                            </h1>
+                            <div style={{ color: '#4db8e8', fontSize: '0.8rem', marginTop: '0.25rem' }}>
+                                {location.label} &nbsp;·&nbsp; {isHistorical ? `Historical Data — ${selectedYear}` : 'Live Hourly Data'}
+                            </div>
                         </div>
                     </div>
 

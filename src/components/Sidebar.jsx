@@ -5,36 +5,60 @@ export default function Sidebar({
     locationId, onLocationChange,
     activeParams, onToggleParam,
     onRefresh,
+    isOpen, onClose, // New props for mobile control
 }) {
     return (
-        <aside
-            className="flex flex-col gap-7 py-6 px-5 h-full overflow-y-auto"
-            style={{
-                width: '260px',
-                minWidth: '260px',
-                background: 'rgba(4,24,46,0.85)',
-                borderRight: '1px solid rgba(36,144,204,0.18)',
-                backdropFilter: 'blur(16px)',
-            }}
-        >
-            {/* Logo */}
-            <div className="flex items-center gap-3 mb-2">
-                <div
-                    style={{
-                        width: 38, height: 38,
-                        borderRadius: '50%',
-                        background: 'radial-gradient(circle at 35% 35%, #00d4ff 0%, #135580 70%)',
-                        boxShadow: '0 0 18px rgba(0,212,255,0.4)',
-                        flexShrink: 0,
-                    }}
-                />
-                <div>
-                    <div className="gradient-text font-extrabold text-sm leading-tight">Ocean Blue</div>
-                    <div style={{ color: '#4db8e8', fontSize: '0.65rem', letterSpacing: '0.1em' }}>
-                        Data Explorer
+        <>
+            {/* Mobile Overlay Background */}
+            <div 
+                className={`sidebar-mobile-overlay ${isOpen ? 'active' : ''}`}
+                onClick={onClose}
+            />
+
+            <aside
+                className={`flex flex-col gap-7 py-6 px-5 h-full overflow-y-auto transition-transform duration-300 ease-in-out`}
+                style={{
+                    width: '260px',
+                    minWidth: '260px',
+                    background: 'rgba(4,24,46,0.85)',
+                    borderRight: '1px solid rgba(36,144,204,0.18)',
+                    backdropFilter: 'blur(16px)',
+                    position: window.innerWidth <= 768 ? 'fixed' : 'relative',
+                    left: 0,
+                    top: 0,
+                    zIndex: 50,
+                    transform: window.innerWidth <= 768 && !isOpen ? 'translateX(-100%)' : 'translateX(0)',
+                }}
+            >
+                {/* Header / Logo */}
+                <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-3">
+                        <div
+                            style={{
+                                width: 38, height: 38,
+                                borderRadius: '50%',
+                                background: 'radial-gradient(circle at 35% 35%, #00d4ff 0%, #135580 70%)',
+                                boxShadow: '0 0 18px rgba(0,212,255,0.4)',
+                                flexShrink: 0,
+                            }}
+                        />
+                        <div>
+                            <div className="gradient-text font-extrabold text-sm leading-tight">Ocean Blue</div>
+                            <div style={{ color: '#4db8e8', fontSize: '0.65rem', letterSpacing: '0.1em' }}>
+                                Data Explorer
+                            </div>
+                        </div>
                     </div>
+
+                    {/* Mobile Close Button */}
+                    <button 
+                        onClick={onClose}
+                        className="mobile-menu-btn"
+                        style={{ width: 32, height: 32, padding: 0, fontSize: '1.2rem', display: window.innerWidth <= 768 ? 'flex' : 'none' }}
+                    >
+                        &times;
+                    </button>
                 </div>
-            </div>
 
             <div style={{ height: 1, background: 'rgba(36,144,204,0.15)' }} />
 
@@ -118,5 +142,6 @@ export default function Sidebar({
                 Source: Open‑Meteo Marine API<br />Auto‑refresh every 5 min
             </div>
         </aside>
+        </>
     );
 }
