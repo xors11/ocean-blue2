@@ -20,8 +20,7 @@
         },
         {
             "source": "/(.*)",
-            "destination": "/ocean-blue/$1",
-            "check": true
+            "destination": "/ocean-blue/$1"
         },
         {
             "source": "/(.*)",

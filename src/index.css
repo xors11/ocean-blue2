@@ -1,0 +1,245 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ocean-950: #020d18;
+  --color-ocean-900: #04182e;
+  --color-ocean-800: #072943;
+  --color-ocean-700: #0c3d5e;
+  --color-ocean-600: #135580;
+  --color-ocean-500: #1a6fa4;
+  --color-ocean-400: #2490cc;
+  --color-ocean-300: #4db8e8;
+  --color-ocean-200: #87d4f4;
+  --color-ocean-100: #c3eafb;
+  --color-ocean-50: #eaf7fe;
+
+  --color-accent: #00d4ff;
+  --color-danger: #ff4d6d;
+  --color-warning: #fbbf24;
+  --color-surface: #071e2b;
+  --color-card: #0a2539;
+
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-ocean-950);
+  color: #e2f4ff;
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-ocean-900);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-ocean-600);
+  border-radius: 3px;
+}
+
+/* Glassmorphism card base */
+.glass-card {
+  background: rgba(10, 37, 57, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(36, 144, 204, 0.2);
+  border-radius: 1rem;
+}
+
+/* Animated gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-ocean-300), var(--color-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Sidebar label */
+.sidebar-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-ocean-400);
+  margin-bottom: 0.5rem;
+}
+
+/* Range input ocean styling */
+input[type='range'] {
+  accent-color: var(--color-accent);
+}
+
+/* Select ocean styling */
+.ocean-select {
+  background: var(--color-ocean-900);
+  border: 1px solid var(--color-ocean-600);
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  color: #e2f4ff;
+  font-size: 0.875rem;
+  width: 100%;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%232490cc' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  padding-right: 2rem;
+}
+
+.ocean-select:hover {
+  border-color: var(--color-accent);
+}
+
+.ocean-select:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.2);
+}
+
+.ocean-select option {
+  background: var(--color-ocean-900);
+}
+
+/* Checkbox pill */
+.param-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: 99px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background 0.2s, border-color 0.2s;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.param-pill:hover {
+  background: rgba(36, 144, 204, 0.1);
+}
+
+.param-pill.active {
+  background: rgba(0, 212, 255, 0.15);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* ── View Mode Toggle Switch ──────────────────────────────────────────────── */
+.view-toggle {
+  display: flex;
+  align-items: center;
+  background: rgba(4, 24, 46, 0.9);
+  border: 1px solid rgba(36, 144, 204, 0.25);
+  border-radius: 99px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.view-toggle button {
+  padding: 0.3rem 0.85rem;
+  border-radius: 99px;
+  border: none;
+  background: transparent;
+  color: #4db8e8;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  white-space: nowrap;
+}
+
+.view-toggle button:hover {
+  background: rgba(36, 144, 204, 0.15);
+}
+
+.view-toggle button.active {
+  background: rgba(0, 212, 255, 0.18);
+  color: var(--color-accent);
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+}
+
+/* ── Mobile Responsiveness ────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* Layout adjustments */
+  main {
+    padding: 1rem 1.25rem !important;
+  }
+
+  /* Header scaling */
+  h1 {
+    font-size: 1.25rem !important;
+  }
+
+  /* Components scaling */
+  .view-toggle {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .view-toggle button {
+    flex: 1;
+    text-align: center;
+  }
+
+  .glass-card {
+    padding: 1.25rem !important;
+  }
+
+  /* Grid adjustments for smaller screens */
+  .grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Overlay sidebar state */
+  .sidebar-mobile-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(2, 13, 24, 0.7);
+    backdrop-filter: blur(4px);
+    z-index: 40;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .sidebar-mobile-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+/* ── Mobile Menu Button ─────────────────────────────────────────────────── */
+.mobile-menu-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 0.5rem;
+  background: rgba(36, 144, 204, 0.1);
+  border: 1px solid rgba(36, 144, 204, 0.2);
+  color: var(--color-accent);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-btn {
+    display: flex;
+  }
+}
