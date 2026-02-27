@@ -1,9 +1,13 @@
-const express = require("express");
-const axios = require("axios");
-const cors = require("cors");
-const fs = require("fs");
-const path = require("path");
-const csv = require("csv-parser");
+import express from "express";
+import axios from "axios";
+import cors from "cors";
+import fs from "fs";
+import path from "path";
+import csv from "csv-parser";
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 app.use(cors());

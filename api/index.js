@@ -1,9 +1,9 @@
-const express = require("express");
-const axios = require("axios");
-const cors = require("cors");
-const fs = require("fs");
-const path = require("path");
-const csv = require("csv-parser");
+import express from "express";
+import axios from "axios";
+import cors from "cors";
+import fs from "fs";
+import path from "path";
+import csv from "csv-parser";
 
 const app = express();
 app.use(cors());
@@ -186,4 +186,4 @@ app.get("/api/fisheries", async (req, res) => {
         });
 });
 
-module.exports = app;
+export default app;

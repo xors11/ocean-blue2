@@ -2,6 +2,7 @@
     "name": "ocean-blue-backend",
     "version": "1.0.0",
     "description": "Express backend for Ocean Blue – proxies Open-Meteo and serves historical CSV data",
+    "type": "module",
     "main": "server.js",
     "scripts": {
         "start": "node server.js",
