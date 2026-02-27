@@ -1,7 +1,7 @@
-# Backend dependencies
+# Dependencies
 node_modules/
 
-# Frontend dependencies
+# Build output
 dist/
 dist-ssr/
 
